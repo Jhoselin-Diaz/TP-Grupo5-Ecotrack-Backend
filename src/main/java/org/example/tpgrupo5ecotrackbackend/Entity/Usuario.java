@@ -31,7 +31,6 @@ public class Usuario {
     private Boolean enabled = true;
 
 
-
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<SubCategoriaAlimento> alimentos;
 
@@ -60,8 +59,8 @@ public class Usuario {
     @JoinTable(
             name = "usuario_roles",
             joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id")
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Rol> rol;
+    private List<Rol> roles;
 
 }
