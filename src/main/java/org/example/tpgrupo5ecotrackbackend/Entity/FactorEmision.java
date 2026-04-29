@@ -11,14 +11,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FactorEmision {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFactor;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String codigo;
-
+    private String nombre;
+    private String keyword;
     private String unidad;
-
     private Float factorKgCO2PorUnidad;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
 }
