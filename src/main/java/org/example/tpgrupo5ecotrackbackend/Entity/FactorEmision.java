@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FactorEmision {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFactor;
-
 
     @Column(nullable = false, unique = true)
     private String codigo;
@@ -26,4 +26,5 @@ public class FactorEmision {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
 }

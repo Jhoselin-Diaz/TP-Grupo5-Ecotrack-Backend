@@ -12,13 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConsumoDetalle {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDetalle;
 
-    private String clave; // "marca", "tipo_gasolina"
-    private String valor; // "Toyota", "Diesel"
+    private String clave;
+    private String valor;
 
     @ManyToOne
     @JoinColumn(name = "consumo_id")

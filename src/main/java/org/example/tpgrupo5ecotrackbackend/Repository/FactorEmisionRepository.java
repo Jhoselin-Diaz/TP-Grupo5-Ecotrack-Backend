@@ -9,5 +9,4 @@ import java.util.List;
 public interface FactorEmisionRepository extends JpaRepository<FactorEmision, Long> {
 
     List<FactorEmision> findByCategoria(Categoria categoria);
-
 }
