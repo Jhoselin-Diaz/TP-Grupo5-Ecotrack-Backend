@@ -1,6 +1,7 @@
 package org.example.tpgrupo5ecotrackbackend.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,30 +31,12 @@ public class Usuario {
 
     private Boolean enabled = true;
 
-
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<SubCategoriaAlimento> alimentos;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<SubCategoriaElectrodomestico> electrodomestico;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<SubCategoriaRopa> ropas;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<SubCategoriaCoche> coches;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<SubCategoriaAutobus> autobuses;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<SubCategoriaServicioVivienda> serviciosViviendas;
+    @JsonManagedReference
+    private List<Consumo> consumos;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<HuellaCarbono> huellas;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Resultado> resultado;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

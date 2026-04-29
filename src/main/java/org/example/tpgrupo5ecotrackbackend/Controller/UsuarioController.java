@@ -29,6 +29,14 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
+    @PutMapping("/actualiza/{id}")
+    public UsuarioResponseDTO actualizar(
+            @PathVariable Long id,
+            @RequestBody UsuarioDTO dto
+    ) {
+        return usuarioService.actualizar(id, dto);
+    }
+
     @DeleteMapping("/elimina/{id}")
     public String eliminar(@PathVariable Long id) {
         return usuarioService.eliminar(id);

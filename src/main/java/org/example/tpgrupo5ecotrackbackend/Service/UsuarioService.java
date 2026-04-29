@@ -20,17 +20,14 @@ import java.util.List;
 @Slf4j
 public class UsuarioService {
 
-    private final UsuarioRepository usuarioRepository;
-    private final RolRepository rolRepository;
+    @Autowired
+    private  UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private  RolRepository rolRepository;
 
     @Autowired
     private ModelMapper modelMapper;
-
-    public UsuarioService(UsuarioRepository usuarioRepository,
-                          RolRepository roleRepository) {
-        this.usuarioRepository = usuarioRepository;
-        this.rolRepository = roleRepository;
-    }
 
 
     public List<UsuarioResponseDTO> obtenerUsuarios() {
@@ -49,25 +46,44 @@ public class UsuarioService {
                 .toList();
     }
 
-
     public UsuarioResponseDTO insertar(UsuarioDTO usuarioDTO) {
 
         log.info("Insertando nuevo usuario: {}", usuarioDTO.getUsername());
-        if (usuarioRepository.findByUsername(usuarioDTO.getUsername()).isPresent()) {
-            throw new RuntimeException("El usuario ya existe");
+        if (usuarioRepository.findByCorreo(usuarioDTO.getCorreo()).isPresent()) {
+            throw new RuntimeException("El correo ya está registrado");
         }
 
         Rol rolUser = rolRepository.findByName("USER")
                 .orElseThrow(() -> new RuntimeException("Rol USER no encontrado"));
         Usuario usuario = modelMapper.map(usuarioDTO, Usuario.class);
-
-        usuario.setEnabled(true);
         usuario.setRoles(List.of(rolUser));
 
         Usuario usuarioGuardado = usuarioRepository.save(usuario);
         return modelMapper.map(usuarioGuardado, UsuarioResponseDTO.class);
     }
 
+    public UsuarioResponseDTO actualizar(Long id, UsuarioDTO dto) {
+
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (!usuario.getCorreo().equals(dto.getCorreo())) {
+            if (usuarioRepository.findByCorreo(dto.getCorreo()).isPresent()) {
+                throw new RuntimeException("El correo ya está registrado");
+            }
+            usuario.setCorreo(dto.getCorreo());
+        }
+
+        usuario.setUsername(dto.getUsername());
+
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            usuario.setPassword(dto.getPassword());
+        }
+
+        Usuario actualizado = usuarioRepository.save(usuario);
+
+        return modelMapper.map(actualizado, UsuarioResponseDTO.class);
+    }
 
     public String eliminar(Long id) {
         log.warn("Eliminando usuario con ID: {}", id);

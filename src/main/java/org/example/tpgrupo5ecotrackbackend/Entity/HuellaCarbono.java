@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.Contract;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
 
 @Entity
@@ -21,15 +22,12 @@ public class HuellaCarbono {
     private Long idHuella;
 
     private String periodo;
-
     private LocalDateTime fechaCalculo;
-
-    private Long totalKgCO2;
+    private Float totalKgCO2;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "huella", cascade = CascadeType.ALL)
-    private List<Resultado> resultados;
+
 }
