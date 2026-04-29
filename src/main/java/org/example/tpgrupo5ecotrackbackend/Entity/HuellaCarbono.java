@@ -16,20 +16,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HuellaCarbono {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idHuella;
 
     private String periodo;
-
     private LocalDateTime fechaCalculo;
-
-    private Long totalKgCO2;
+    private Float totalKgCO2;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "huella", cascade = CascadeType.ALL)
-    private List<Resultado> resultados;
 }
