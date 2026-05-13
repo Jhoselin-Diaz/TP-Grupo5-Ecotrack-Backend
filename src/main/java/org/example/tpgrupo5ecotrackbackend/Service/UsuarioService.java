@@ -115,6 +115,28 @@ public class UsuarioService {
        return modelMapper.map(actualizado, UsuarioResponseDTO.class);
    }
 
+    public UsuarioResponseDTO actualizar(Long id, UsuarioDTO dto) {
+
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (!usuario.getCorreo().equals(dto.getCorreo())) {
+            if (usuarioRepository.findByCorreo(dto.getCorreo()).isPresent()) {
+                throw new RuntimeException("El correo ya está registrado");
+            }
+            usuario.setCorreo(dto.getCorreo());
+        }
+
+        usuario.setUsername(dto.getUsername());
+
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            usuario.setPassword(dto.getPassword());
+        }
+
+        Usuario actualizado = usuarioRepository.save(usuario);
+
+        return modelMapper.map(actualizado, UsuarioResponseDTO.class);
+    }
 
    public String eliminar(Long id) {
        log.warn("Eliminando usuario con ID: {}", id);
