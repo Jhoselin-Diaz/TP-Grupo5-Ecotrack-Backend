@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/categoria")
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:9876", "http://localhost:4200"})
 public class CategoriaController {
 
     @Autowired

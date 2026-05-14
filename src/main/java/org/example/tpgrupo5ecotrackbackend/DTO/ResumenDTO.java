@@ -12,6 +12,4 @@ public class ResumenDTO {
     private String periodo;
     private List<CategoriaDTO> categorias;
     private EquivalenciaDTO equivalencias;
-
-
 }

@@ -59,4 +59,60 @@ public class ConsumoService {
 
         return consumoRepository.save(consumo);
 
-  }}
+  }
+
+    public List<Consumo> listar() {
+        return consumoRepository.findAll();
+    }
+
+
+    public Consumo editar(Long id, ConsumoDTO dto) {
+
+        Consumo consumo = consumoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Consumo no encontrado"));
+
+        FactorEmision factor = factorRepository.findById(dto.getFactorId())
+                .orElseThrow(() -> new RuntimeException("Factor no encontrado"));
+
+        // Validar unidad
+        if (dto.getUnidad() != null &&
+                !factor.getUnidad().equalsIgnoreCase(dto.getUnidad())) {
+            throw new RuntimeException("Unidad incorrecta. Se esperaba: " + factor.getUnidad());
+        }
+
+        consumo.setFactor(factor);
+        consumo.setCategoria(factor.getCategoria());
+        consumo.setNombre(factor.getNombre());
+        consumo.setCantidad(dto.getCantidad());
+        consumo.setUnidad(factor.getUnidad());
+
+        // Limpiar detalles anteriores
+        consumo.getDetalles().clear();
+
+        // Agregar nuevos detalles
+        if (dto.getDetalles() != null && !dto.getDetalles().isEmpty()) {
+
+            List<ConsumoDetalle> nuevosDetalles = dto.getDetalles().stream().map(d -> {
+                ConsumoDetalle detalle = new ConsumoDetalle();
+                detalle.setClave(d.getClave());
+                detalle.setValor(d.getValor());
+                detalle.setConsumo(consumo);
+                return detalle;
+            }).toList();
+
+            consumo.getDetalles().addAll(nuevosDetalles);
+        }
+
+        return consumoRepository.save(consumo);
+    }
+
+    public void eliminar(Long id) {
+
+        Consumo consumo = consumoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Consumo no encontrado"));
+
+        consumoRepository.delete(consumo);
+    }
+
+
+}

@@ -14,5 +14,4 @@ public class EvolucionHuellaDTO {
     private Integer anio;
     private Integer mes;
     private Double totalKgCO2;
-
 }

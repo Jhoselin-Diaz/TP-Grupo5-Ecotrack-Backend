@@ -49,7 +49,7 @@ public class AuthController {
                 .collect(Collectors.toSet());
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Authorization", token);
+        responseHeaders.set("Authorization", "Bearer" + token);
         AuthResponseDTO authResponseDTO = new AuthResponseDTO();
         authResponseDTO.setRoles(roles);
         authResponseDTO.setJwt(token);

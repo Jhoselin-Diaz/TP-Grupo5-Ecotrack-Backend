@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioHuellaTotalDTO {
+
     private Long usuarioId;
     private String username;
     private String correo;

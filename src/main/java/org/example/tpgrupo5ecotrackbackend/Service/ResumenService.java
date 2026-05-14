@@ -57,7 +57,7 @@ public class ResumenService {
                 .collect(Collectors.groupingBy(c ->
                         c.getCategoria() != null
                                 ? c.getCategoria().getNombreCategoria()
-                                : "Sin categorÃ­a"
+                                : "Sin categoría"
                 ))
                 .entrySet()
                 .stream()

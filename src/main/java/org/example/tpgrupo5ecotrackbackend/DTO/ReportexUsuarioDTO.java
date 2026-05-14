@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -20,6 +19,4 @@ public class ReportexUsuarioDTO {
     private Double totalGeneral;
     private List<CategoriaDTO> categorias;
     private EquivalenciaDTO equivalencias;
-
-
 }

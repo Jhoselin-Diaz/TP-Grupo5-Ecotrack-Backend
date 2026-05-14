@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class EquivalenciaDTO {
+
     private Double arboles;
     private Double kmAuto;
     private Double mesesElectricidad;
-
 }

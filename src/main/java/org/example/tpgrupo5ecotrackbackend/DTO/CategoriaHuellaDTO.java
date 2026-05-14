@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoriaHuellaDTO {
+
     private String categoria;
     private Double totalKgCO2;
     private Double porcentaje;

@@ -13,12 +13,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UsuarioActivoDTO {
 
-
     private Long usuarioId;
     private String username;
     private String correo;
     private Long totalRegistros;
     private LocalDateTime ultimoRegistro;
-
-
 }

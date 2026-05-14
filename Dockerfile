@@ -12,7 +12,7 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Imagen final
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar backend.jar

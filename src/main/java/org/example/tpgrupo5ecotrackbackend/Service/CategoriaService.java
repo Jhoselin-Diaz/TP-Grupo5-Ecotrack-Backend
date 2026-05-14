@@ -13,15 +13,8 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public Categoria registrar(Categoria categoria){
-
-        if (categoriaRepository.existsByNombreCategoria(categoria.getNombreCategoria())) {
-            throw new RuntimeException("La categoría ya existe");
-        }
-        return categoriaRepository.save(categoria);
-    }
-
     public List<Categoria> listarCategorias() {
+
         return categoriaRepository.findAll();
     }
 }

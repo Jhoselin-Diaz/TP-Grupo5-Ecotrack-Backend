@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ConsumoDetalleDTO {
 
-
     private String clave;
     private String valor;
 

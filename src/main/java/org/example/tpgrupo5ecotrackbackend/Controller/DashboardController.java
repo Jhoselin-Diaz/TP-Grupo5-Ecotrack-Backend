@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/dashboard")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:9876/", "http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:9876", "http://localhost:4200"})
 public class DashboardController {
 
     private final DashboardService dashboardService;
