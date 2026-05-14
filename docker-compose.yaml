@@ -8,8 +8,7 @@ services:
       - "6868:8080"
     networks:
       - my-network-name
-    depends_on:
-      - db
+
     environment:
 
       - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-d7fhnlpkh4rs739peshg-a.oregon-postgres.render.com:5432/ECOTRACKG5
