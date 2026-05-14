@@ -21,6 +21,8 @@ public class FactorEmision {
     private String nombre;
     private String keyword;
     private String unidad;
+
+    @Column(name = "factor_kgco2_por_unidad")
     private Float factorKgCO2PorUnidad;
 
     @ManyToOne
